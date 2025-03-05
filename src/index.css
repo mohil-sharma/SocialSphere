@@ -1,0 +1,198 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 220 20% 10%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 10%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 10%;
+    
+    --primary: 220 70% 50%;
+    --primary-rgb: 34, 100, 204;
+    --primary-foreground: 210 20% 98%;
+    
+    --secondary: 220 20% 96%;
+    --secondary-foreground: 220 20% 10%;
+    
+    --muted: 220 20% 96%;
+    --muted-foreground: 220 10% 40%;
+    
+    --accent: 220 70% 50%;
+    --accent-foreground: 210 20% 98%;
+    
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 210 20% 98%;
+    
+    --border: 220 20% 90%;
+    --input: 220 20% 90%;
+    --ring: 220 70% 50%;
+    
+    --radius: 0.75rem;
+  }
+ 
+  .dark {
+    --background: 220 20% 8%;
+    --foreground: 210 20% 98%;
+ 
+    --card: 224 25% 12%;
+    --card-foreground: 210 20% 98%;
+ 
+    --popover: 224 25% 12%;
+    --popover-foreground: 210 20% 98%;
+ 
+    --primary: 210 70% 60%;
+    --primary-rgb: 82, 146, 247;
+    --primary-foreground: 220 20% 10%;
+ 
+    --secondary: 215 25% 18%;
+    --secondary-foreground: 210 20% 98%;
+ 
+    --muted: 215 25% 18%;
+    --muted-foreground: 220 10% 70%;
+ 
+    --accent: 210 70% 60%;
+    --accent-foreground: 220 20% 10%;
+ 
+    --destructive: 0 70% 60%;
+    --destructive-foreground: 210 20% 98%;
+ 
+    --border: 215 25% 25%;
+    --input: 215 25% 25%;
+    --ring: 210 70% 60%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply scroll-smooth antialiased;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans transition-colors duration-200;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    @apply bg-primary/20 text-foreground;
+  }
+}
+
+@layer utilities {
+  /* Glass morphism effects */
+  .glass {
+    @apply bg-white/10 backdrop-blur-lg border border-white/20 shadow-lg;
+  }
+  
+  .glass-card {
+    @apply bg-white/60 dark:bg-black/60 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-sm;
+  }
+  
+  .glass-input {
+    @apply bg-white/70 dark:bg-black/70 backdrop-blur-lg border border-white/30 dark:border-white/10;
+  }
+
+  /* Animations */
+  .animate-on-scroll {
+    @apply opacity-0 transition-all duration-700 ease-apple-ease;
+  }
+  
+  .animate-on-scroll.animate-fade-in {
+    @apply opacity-100;
+  }
+  
+  .animate-on-scroll.animate-slide-up {
+    @apply translate-y-0 opacity-100;
+  }
+  
+  /* Transitions */
+  .page-transition {
+    @apply transition-opacity duration-300 ease-apple-ease;
+  }
+  
+  .page-enter {
+    @apply opacity-0;
+  }
+  
+  .page-enter-active {
+    @apply opacity-100;
+  }
+  
+  .page-exit {
+    @apply opacity-100;
+  }
+  
+  .page-exit-active {
+    @apply opacity-0;
+  }
+
+  /* Button hover effects */
+  .btn-hover-effect {
+    @apply relative overflow-hidden;
+  }
+  
+  .btn-hover-effect::after {
+    @apply content-[''] absolute inset-0 bg-white opacity-0 transition-opacity duration-300;
+  }
+  
+  .btn-hover-effect:hover::after {
+    @apply opacity-10;
+  }
+  
+  /* Text animations */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-500;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-secondary/50;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/30 rounded-full hover:bg-muted-foreground/50 transition-colors;
+}
+
+/* Ensure full height for app container */
+#root {
+  @apply h-screen w-full m-0 p-0;
+}
+
+/* Additional animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes pulse-shadow {
+  0% { box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(var(--primary-rgb), 0); }
+  100% { box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0); }
+}
+
+.animate-pulse-shadow {
+  animation: pulse-shadow 2s infinite;
+}
